@@ -1,0 +1,89 @@
+{
+  "triggers": [
+    {
+      "id": "endpoint_on",
+      "title": {
+        "en": "An endpoint turned on"
+      },
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=wallwand"
+        },
+        {
+          "name": "endpoint",
+          "type": "autocomplete"
+        }
+      ],
+      "tokens": [
+        {
+          "name": "endpoint_label",
+          "type": "string",
+          "title": {
+            "en": "Endpoint Label"
+          }
+        }
+      ]
+    },
+    {
+      "id": "endpoint_off",
+      "title": {
+        "en": "An endpoint turned off"
+      },
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=wallwand"
+        },
+        {
+          "name": "endpoint",
+          "type": "autocomplete"
+        }
+      ],
+      "tokens": [
+        {
+          "name": "endpoint_label",
+          "type": "string",
+          "title": {
+            "en": "Endpoint Label"
+          }
+        }
+      ]
+    },
+    {
+      "id": "endpoint_dim",
+      "title": {
+        "en": "Dim level changed"
+      },
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=wallwand"
+        },
+        {
+          "name": "endpoint",
+          "type": "autocomplete"
+        }
+      ],
+      "tokens": [
+        {
+          "name": "endpoint_label",
+          "type": "string",
+          "title": {
+            "en": "Endpoint Label"
+          }
+        },
+        {
+          "name": "dim",
+          "type": "number",
+          "title": {
+            "en": "Level"
+          }
+        }
+      ]
+    }
+  ]
+}

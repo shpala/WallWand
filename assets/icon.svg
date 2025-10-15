@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 70" width="1000" height="700">
+  <!-- Group to center and scale the original square content -->
+  <g transform="translate(15, 0) scale(0.7)">
+    
+    <!-- Original content from the 100x100 icon -->
+    <rect x="10" y="10" width="80" height="80" rx="12" fill="none" stroke="#007bff" stroke-width="3" />
+    <g transform="translate(0, 7)">
+      <g stroke="#007bff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M30 45 L40 65 L50 45 L60 65 L70 45" />
+      </g>
+      <g stroke="#007bff" stroke-width="4" stroke-linecap="round" fill="none">
+        <path d="M40 35 A 15 15 0 0 1 60 35" />
+        <path d="M32 28 A 25 25 0 0 1 68 28" />
+      </g>
+    </g>
+
+  </g>
+</svg>

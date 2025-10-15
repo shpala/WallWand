@@ -1,0 +1,10 @@
+{
+  "name": "com.shpala.WallWand",
+  "version": "0.1.0",
+  "description": "TouchWand WallWand device support with dimmer and switch endpoints.",
+  "main": "app.js",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "homey-zwavedriver": "^2.2.1"
+  }
+}
