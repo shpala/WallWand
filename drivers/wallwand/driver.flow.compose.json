@@ -1,89 +1,125 @@
 {
-  "triggers": [
-    {
-      "id": "endpoint_on",
-      "title": {
-        "en": "An endpoint turned on"
+  "flow": {
+    "triggers": [
+      {
+        "id": "endpoint_on",
+        "title": {
+          "en": "An endpoint turned on"
+        },
+        "titleFormatted": {
+          "en": "[[endpoint_label]] turned on"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=wallwand"
+          },
+          {
+            "name": "endpoint",
+            "type": "autocomplete"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "endpoint_label",
+            "type": "string",
+            "title": {
+              "en": "Endpoint Label"
+            }
+          }
+        ]
       },
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=wallwand"
+      {
+        "id": "endpoint_off",
+        "title": {
+          "en": "An endpoint turned off"
         },
-        {
-          "name": "endpoint",
-          "type": "autocomplete"
-        }
-      ],
-      "tokens": [
-        {
-          "name": "endpoint_label",
-          "type": "string",
-          "title": {
-            "en": "Endpoint Label"
+        "titleFormatted": {
+          "en": "[[endpoint_label]] turned off"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=wallwand"
+          },
+          {
+            "name": "endpoint",
+            "type": "autocomplete"
           }
-        }
-      ]
-    },
-    {
-      "id": "endpoint_off",
-      "title": {
-        "en": "An endpoint turned off"
+        ],
+        "tokens": [
+          {
+            "name": "endpoint_label",
+            "type": "string",
+            "title": {
+              "en": "Endpoint Label"
+            }
+          }
+        ]
       },
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=wallwand"
+      {
+        "id": "endpoint_dim",
+        "title": {
+          "en": "Dim level changed"
         },
-        {
-          "name": "endpoint",
-          "type": "autocomplete"
-        }
-      ],
-      "tokens": [
-        {
-          "name": "endpoint_label",
-          "type": "string",
-          "title": {
-            "en": "Endpoint Label"
-          }
-        }
-      ]
-    },
-    {
-      "id": "endpoint_dim",
-      "title": {
-        "en": "Dim level changed"
-      },
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=wallwand"
+        "titleFormatted": {
+          "en": "[[endpoint_label]] dim level changed"
         },
-        {
-          "name": "endpoint",
-          "type": "autocomplete"
-        }
-      ],
-      "tokens": [
-        {
-          "name": "endpoint_label",
-          "type": "string",
-          "title": {
-            "en": "Endpoint Label"
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=wallwand"
+          },
+          {
+            "name": "endpoint",
+            "type": "autocomplete"
           }
+        ],
+        "tokens": [
+          {
+            "name": "endpoint_label",
+            "type": "string",
+            "title": {
+              "en": "Endpoint Label"
+            }
+          },
+          {
+            "name": "dim",
+            "type": "number",
+            "title": {
+              "en": "Level"
+            }
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "turn_on_endpoint",
+        "title": {
+          "en": "Turn on an endpoint"
         },
-        {
-          "name": "dim",
-          "type": "number",
-          "title": {
-            "en": "Level"
+        "titleFormatted": {
+          "en": "Turn on [[endpoint]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=wallwand"
+          },
+          {
+            "name": "endpoint",
+            "type": "autocomplete",
+            "title": {
+              "en": "Endpoint"
+            }
           }
-        }
-      ]
-    }
-  ]
+        ]
+      }
+    ]
+  }
 }
