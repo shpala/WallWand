@@ -31,8 +31,6 @@ module.exports = class WallWandDevice extends ZwaveDevice {
       await this._syncAllEndpointStates(node);
       await this._cleanupOrphanedEndpoints(); // Clean up unused capabilities
 
-      this._registerFlowTriggers();
-
       await this._applyLabelsFromSettings(this.getSettings());
 
       this.log('onNodeInit finished successfully.');
@@ -55,35 +53,6 @@ module.exports = class WallWandDevice extends ZwaveDevice {
     }
 
     return super.onSettings({ oldSettings, newSettings, changedKeys });
-  }
-
-  _registerFlowTriggers() {
-    this.log('Registering flow triggers...');
-    this.endpointOnTrigger = this.homey.flow.getTriggerCard('endpoint_on');
-    this.endpointOffTrigger = this.homey.flow.getTriggerCard('endpoint_off');
-    this.endpointDimTrigger = this.homey.flow.getTriggerCard('endpoint_dim');
-
-    const autocompleteListener = async (query) => {
-      return this._getEndpointAutocompleteList(query);
-    };
-
-    const dimAutocompleteListener = async (query) => {
-      const allEndpoints = await this._getEndpointAutocompleteList(query);
-      return allEndpoints.filter(item => {
-        const endpointNum = item.id;
-        return this._endpointTypes[endpointNum] === WallWandDevice.DEVICE_TYPES.DIMMER;
-      });
-    };
-
-    if (this.endpointOnTrigger) {
-      this.endpointOnTrigger.registerArgumentAutocompleteListener('endpoint', autocompleteListener);
-    }
-    if (this.endpointOffTrigger) {
-      this.endpointOffTrigger.registerArgumentAutocompleteListener('endpoint', autocompleteListener);
-    }
-    if (this.endpointDimTrigger) {
-      this.endpointDimTrigger.registerArgumentAutocompleteListener('endpoint', dimAutocompleteListener);
-    }
   }
 
   async _getEndpointAutocompleteList(query) {
@@ -472,17 +441,6 @@ module.exports = class WallWandDevice extends ZwaveDevice {
         const isDimmer = this._endpointTypes[endpointNum] === WallWandDevice.DEVICE_TYPES.DIMMER;
         const defaultLabel = this._getDefaultLabel(endpointNum, isDimmer, cap);
         const endpointLabel = customLabel || defaultLabel;
-
-        this.log(`Flow trigger for endpoint ${endpointNum} (${endpointLabel}) turned ${newValue ? 'ON' : 'OFF'}`);
-
-        const tokens = { endpoint_label: endpointLabel };
-        const state = { endpoint: endpointNum };
-
-        const trigger = newValue ? this.endpointOnTrigger : this.endpointOffTrigger;
-        if (trigger) {
-          trigger.trigger(this, tokens, state)
-            .catch(this.error);
-        }
       }
     }
   }
@@ -507,16 +465,6 @@ module.exports = class WallWandDevice extends ZwaveDevice {
         const isDimmer = this._endpointTypes[endpointNum] === WallWandDevice.DEVICE_TYPES.DIMMER;
         const defaultLabel = this._getDefaultLabel(endpointNum, isDimmer, cap);
         const endpointLabel = customLabel || defaultLabel;
-
-        this.log(`Flow trigger for endpoint ${endpointNum} (${endpointLabel}) dim level changed to ${normalizedValue}`);
-
-        const tokens = { endpoint_label: endpointLabel, dim: normalizedValue };
-        const state = { endpoint: endpointNum };
-
-        if (this.endpointDimTrigger) {
-          this.endpointDimTrigger.trigger(this, tokens, state)
-            .catch(this.error);
-        }
       }
     }
   }
